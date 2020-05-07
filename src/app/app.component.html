@@ -1,2 +1,36 @@
+<div class="navbar">
+    <a>RENTAL MANAGEMENT SYSTEM</a>
+    <select class="location-dropdown" name="" id="" [(ngModel)]="selectedLocation" (ngModelChange)="selectCategory(null)">
+        <optgroup *ngFor="let location of locationData" label="{{ location.name }}">
+            <option [ngValue]="branch.categories" *ngFor="let branch of location.branches">{{ branch.name }}</option>
+        </optgroup>
+    </select>
+</div>
+
+<div *ngIf="selectedLocation">
+    <p class="breadcrumb">
+        <span (click)="selectCategory(null)">Home</span>
+        <span style="cursor: default;" *ngIf="selectedCategory"> / {{ selectedCategory.name }}</span>
+    </p>
+    
+    <div *ngIf="!selectedCategory" class="product-container">
+        <div *ngFor="let category of selectedLocation" (click)="selectCategory(category)">
+            <img class="product-image" src="../assets/images/{{category.image}}" alt="" onerror="this.src='../assets/images/img-placeholder-square-300x300.jpg'">
+            <p>{{ category.name }}</p>
+        </div>
+    </div>
+    
+    <div *ngIf="selectedCategory" class="product-container">
+        <div *ngFor="let subcategory of selectedCategory.subcategories" style="cursor: default;">
+            <img class="product-image" src="../assets/images/{{subcategory.image}}" alt="" onerror="this.src='../assets/images/img-placeholder-square-300x300.jpg'">
+            <p>{{ subcategory.name }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="welcome-message" *ngIf="!selectedLocation">
+    <h2>WELCOME TO <br> RENTAL MANAGEMENT SYSTEMS</h2>
+    <p>Please select a Location</p>
+</div>
 
 <router-outlet></router-outlet>
