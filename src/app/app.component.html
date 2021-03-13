@@ -1,7 +1,7 @@
 <div class="navbar">
     <a>RENTAL MANAGEMENT SYSTEM</a>
     <select class="location-dropdown" name="" id="" [(ngModel)]="selectedLocation" (ngModelChange)="selectCategory(null)">
-        <optgroup *ngFor="let location of locationData" label="{{ location.name }}">
+        <optgroup *ngFor="let location of locationData | async" label="{{ location.name }}">
             <option [ngValue]="branch.categories" *ngFor="let branch of location.branches">{{ branch.name }}</option>
         </optgroup>
     </select>
